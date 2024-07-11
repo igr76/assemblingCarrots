@@ -17,13 +17,25 @@ public class Main {
         while (true) {
             int[] copyArray = Arrays.copyOf(array, array.length);
             for (int i = 0; i < copyArray.length; i++) {
+                if (copyArray[i] == MAX_WEIGHT) {//совпадение с максимальным весом
+                    totalHarvest+=copyArray[i];trips++;}else
                 if (copyArray[i] != 0) {
                     for (int j = 1; j < copyArray.length; j++) {
-                        if (copyArray[i] == MAX_WEIGHT) {
-                            totalHarvest+=copyArray[i];trips++;}else
-                                if ((copyArray[i] +copyArray[j])== MAX_WEIGHT) {
-                            totalHarvest=copyArray[i]+copyArray[j];
-                            copyArray[j]=0; trips++;break;}
+                        int currentWeight=0;int currentTotalWeight=0; int currentPosition=0;//накопление веса
+                            currentWeight=copyArray[i] + copyArray[j];
+                        if (currentTotalWeight < currentWeight && currentWeight<MAX_WEIGHT) {
+                            currentTotalWeight = currentWeight;
+                            currentPosition = j;
+                        }else if (currentWeight == MAX_WEIGHT) {// сумма с максимальным весом
+                                totalHarvest += currentWeight;
+                                copyArray[j] = 0;
+                                trips++;j=copyArray.length;
+                        } else if (j == copyArray.length) {// учесть наибольший  вес от максимального
+                            totalHarvest += currentTotalWeight;
+                            copyArray[currentPosition] = 0;
+                            trips++;
+                        }
+                        if (trips>=MAX_TRIPS) {return totalHarvest;}
                     }
                 }
                 if (trips>=MAX_TRIPS) {return totalHarvest;}
