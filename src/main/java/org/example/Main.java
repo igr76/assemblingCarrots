@@ -1,14 +1,17 @@
 package org.example;
 
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class Main {
     private static final int MAX_WEIGHT = 5;
     private static final int MAX_TRIPS = 10;
     public static void main(String[] args) {
-
+       // test
         System.out.println("Максимальное количество собранной моркови за  " +
                 MAX_TRIPS + "  ходок - " + algorithmHarvest(new int[]{1,2,3,4,5}) + " кг.");
+        System.out.println("Максимальное количество собранной моркови за  " +
+                MAX_TRIPS + "  ходок - " + algorithmHarvest(new int[]{1,2,3,5}) + " кг.");
     }
 
     public static int algorithmHarvest(int[] array) {
